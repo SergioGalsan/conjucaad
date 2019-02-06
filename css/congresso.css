@@ -1,0 +1,55 @@
+label{
+  /* color: #f05f40; */
+  font-weight: bold;
+}
+
+div[aria-labelledby="dropdownLogin"]{
+	min-width: 20rem !important; 
+}
+
+.cg_red{color:#f85d2c !important} 
+.cg_green{color:#1fae66 !important}
+.cg_yellow{color:#f89c2c !important}
+.cg_yellow2{color:#f6de52 !important}
+.cg_blue{color:#23709e !important}
+.cg_blue2{color:#3debef !important}
+.cg_white{color:#fff !important}
+.cg_black{color:#111 !important}
+.cg_grey{color:#777 !important}
+.cg_soft-grey{color:#b5b5b5 !important}
+.cg_facebook{color:#436eac !important}
+.cg_twitter{color:#0598c9 !important}
+.cg_linkedin{color:#2e8cc2 !important}
+.cg_googleplus{color:#cf1900 !important}
+
+.cg_bg-red{background-color:#f85d2c !important}
+.cg_bg-green{background-color:#1fae66 !important}
+.cg_bg-yellow{background-color:#f89c2c !important}
+.cg_bg-blue{background-color:#23709e !important}
+.cg_bg-white{background-color:#fff !important}
+.cg_bg-black{background-color:#111 !important}
+.cg_bg-grey{background-color:#777 !important}
+.cg_bg-dark-red{background-color:#724c3f !important}
+.cg_bg-dark-green{background-color:#2e8258 !important}
+.cg_bg-dark-blue{background-color:#39515f !important}
+.cg_bg-dark-yellow{background-color:#7f684d !important}
+.cg_bg-soft-red{background-color:#ff7c62 !important}
+.cg_bg-soft-green{background-color:#4abc96 !important}
+.cg_bg-soft-yellow{background-color:#f2be3e !important}
+.cg_bg-soft-blue{background-color:#67b8cb !important}
+.cg_bg-soft-grey{background-color:#b5b5b5 !important}
+.cg_bg-facebook{background-color:#436eac !important}
+.cg_bg-twitter{background-color:#0598c9 !important}
+.cg_bg-linkedin{background-color:#2e8cc2 !important}
+.cg_bg-googleplus{background-color:#cf1900 !important}
+.cg_bg-new-blue{background-color:#101937;}
+
+
+.cg_hidden{
+  display: none;
+}
+
+.lbCamisa{
+  font-size: 22px;
+  cursor: pointer;
+}
