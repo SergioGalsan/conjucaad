@@ -7,10 +7,14 @@
 
 @section('conteudo')
 
+		
+		
+
+
     <header class="masthead text-center text-white d-flex">
 			<!-- <img src="img/header.png" style="min-width:100%;min-height:100%;"/> -->
 			<div class="container my-auto ">
-        <div class="row ">
+        <div class="row " style="margin-top: 100px;">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase" style="/*font-size:3.5rem*/">
 							<span style="background:#504379;color:#FFF">&nbsp;CON </span><span style="background:#FFF;color:#504379">&nbsp;JUCAAD </span><br><span style="letter-spacing: 1.4em;">&nbsp;2019</span>
@@ -28,6 +32,7 @@
           <div class="col-lg-12 mx-auto">
 						<p class="text-faded mb-12" style="font-size:3.2rem">JOÃO 15:5</p>
 						<p class="text-faded mb-12" style="font-size:2.1rem">"EU SOU A VIDEIRA VERDADEIRA; VOCÊS SÃO OS RAMOS. SE ALGUÉM PERMANECER EM MIM E EU NELE, ESSE DARÁ MUITO FRUTO; POIS SEM MIM VOCÊS NÃO PODEM FAZER COISA ALGUMA."</p>
+						<p class="text-faded mb-12"><img src="{{url('/img/conectadosComCristo.jpg')}}" style="width:100%;/*heigth:600px*/" alt="Conectados com Cristo"></p>
           </div>
         </div>
       </div>

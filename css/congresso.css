@@ -53,3 +53,24 @@ div[aria-labelledby="dropdownLogin"]{
   font-size: 22px;
   cursor: pointer;
 }
+
+/*
+#popup {
+  position: absolute;
+  margin-top: 500px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 50px 2px #000;
+  padding-bottom: 5px;
+}
+
+#btnClosePopup{
+  width:100px;
+  background-color:#cc0033;
+  color:#ffffff;
+  border:none;
+  margin-left:50%;
+  margin-right:50%;
+  cursor: pointer;
+}
+*/

@@ -1,3 +1,14 @@
+/*
+var close = document.getElementById('btnClosePopup');
+var popup = document.getElementById('popup');
+
+close.addEventListener("click", function() {
+  popup.style.display = 'none';
+});
+*/
+
+
+
 $(document).on('click','#a2GoToTab2', function(){
     $('#a1GoToTab2').click();
 })
