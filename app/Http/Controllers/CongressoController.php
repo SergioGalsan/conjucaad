@@ -102,12 +102,14 @@ class CongressoController extends Controller{
 		
 			return redirect()->action('CongressoController@index')->with('msgHome', $msgHome);
 		}
-
-		$status = Status::where('DS_TIPO_STATUS',2)->get();
 		
+		$congregacao = Congregacao::get();
+		$status = Status::where('DS_TIPO_STATUS',2)->get();
+
 		return view("congresso.inscricao-detalhes")->with('perfilLogado',$perfilLogado)
 											   ->with('inscricao',$inscricao)
-											   ->with('status',$status)
+												 ->with('congregacao',$congregacao)
+												 ->with('status',$status)
 											   ->with('msg',$msg);
 										   									  	
 	}

@@ -130,6 +130,7 @@ $(document).on('click','#cancelarEdicaoStatus', function(){
 
 
 // PARA TESTES 
+/*
 $(document).ready(function(){
     $("[name=NO_USUARIO]").val("Fulano de Teste");
     $("[name=NO_MAIL]").val("fulano@teste.com");
@@ -142,3 +143,4 @@ $(document).ready(function(){
     //$("[name=CD_CONGREGACAO]").val("1");
     //$("[name=CD_USUARIO_LIDER]").val("2");
 })
+*/

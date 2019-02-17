@@ -112,7 +112,7 @@
 								<div class="tabs-container">
 										<ul class="nav nav-tabs" role="tablist">
 												<li><a class="nav-link active" data-toggle="tab" href="#tab-1" id="a1GoToTab1">Inscrição</a></li>
-												<li><a class="nav-link" data-toggle="tab" href="#tab-2" id="a1GoToTab2">Camisas</a></li>
+												<!--<li><a class="nav-link" data-toggle="tab" href="#tab-2" id="a1GoToTab2">Camisas</a></li>-->
 										</ul>
 										<div class="tab-content">
 												<div role="tabpanel" id="tab-1" class="tab-pane active">
@@ -292,7 +292,8 @@
 																			<div class="row">
 																				
 																				<div class="col-md-2">
-																					<a class="btn btn-light btn-xl text-primary" id="a2GoToTab2">Avançar</a>
+																					<!--<a class="btn btn-light btn-xl text-primary" id="a2GoToTab2">Avançar</a>-->
+																					<button type="submit" class="btn btn-primary btn-xl" >Enviar</button>
 																				</div>
 																				
 																			</div>	
@@ -303,6 +304,7 @@
 															</div>																
 														</div>
 												</div> <!-- #tab-1 -->
+												@if(1==2)
 												<div role="tabpanel" id="tab-2" class="tab-pane">
 														<div class="panel-body">
 															<div class="container">
@@ -444,6 +446,7 @@
 															</div> <!-- .container -->	
 														</div> <!-- .panel-body -->
 												</div> <!-- #tab-2 -->
+												@endif
 										</div> <!-- .tab-content -->
 
 

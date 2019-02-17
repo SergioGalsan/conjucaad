@@ -117,7 +117,7 @@ class UsuarioController extends Controller{
 		$req["NR_CELULAR"] = MyUtil::clearMask($req["NR_CELULAR"]);	
 		$req["NR_TELEFONE"] = MyUtil::clearMask($req["NR_TELEFONE"]);
 		//$req["TX_SENHA"] = base64_encode($req["TX_SENHA"]);
-		//dd($req);
+		//dd($request->getPathInfo());
 		$inscricaoPedidos = MyUtil::parseInscricaoPedido($req); //dd($inscricaoPedidos);
 		
 		$usuario = Usuario::where("NO_MAIL",$req["NO_MAIL"])->first(); //dd($usuario);
@@ -137,27 +137,54 @@ class UsuarioController extends Controller{
 		// Se a inscrição estiver validada, não permitir refazê-la
 		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",1],["CD_STATUS",5]])->first(); //dd($inscricao);
 		if(!empty($inscricao)){
+			if($request->getPathInfo() == "/alterar-inscricao"){
+				$msg = array(	"type"=>"danger",
+									"text"=>"Está inscrição já está validada, não é possivel fazer alterações com ela nesse status. É necessário alterar seu status primeiro e o inscrito receberá um e-mail de notificação caso o status seja alterado.");
+				return back()->with('msg', $msg);					
+			}
+			
+			
 			$msgCadastro = array(	"type"=>"danger",
 									"text"=>"<strong>{$req['NO_USUARIO']}</strong>, sua inscrição já está validada e por isso não é possível refazê-la. Procure seu líder para colocá-la novamente com status de pendência e aí será possível refazê-la.");
 			return redirect()->action('CongressoController@index')->with('msgCadastro', $msgCadastro);						
 		}
 
+		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",1]])->first(); //dd($inscricao);
 
-		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",1]])->delete();
-		$inscricao = Inscricao::create(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>1,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>@$req["ST_ALIMENTACAO"]]);
+		if(empty($inscricao)){
+			$inscricao = Inscricao::create(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>1,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>@$req["ST_ALIMENTACAO"]]);
+		}else{
+			InscricaoPedido::where("CD_INSCRICAO",$inscricao->CD_INSCRICAO)->delete();
+			$inscricao->fill(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>1,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>(@$req["ST_ALIMENTACAO"]?:'Sim')]);
+			$inscricao->save();
+		}
+
+		//$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",1]])->delete();
+		
 		if(!empty($inscricaoPedidos))
 			$inscricao->inscricaoPedido()->createMany($inscricaoPedidos);
-		$msgCadastro = array(	"type"=>"success",
-								"text"=>"<strong>{$req['NO_USUARIO']}</strong>, sua inscrição foi realizada com sucesso. Procure seu líder para validá-la.<br>Você também receberá um e-mail de confirmação no endereço {$req['NO_MAIL']} em breve.");
+		
+		//dd($inscricaoPedidos);						
+		if($request->getPathInfo() == "/alterar-inscricao"){
+			$msg = array(	"type"=>"success",
+								"text"=>"Inscrição e pedido alterados com sucesso.");
+			return back()->with('msg', $msg);					
+		}
 
 		// Envio do e-mail para o inscrito		
 		$cdInscricao = $inscricao->CD_INSCRICAO;
 		$inscricaoCompleta = Inscricao::with(['usuarioPerfil','status','evento','inscricaoPedido'])->where('CD_INSCRICAO',$cdInscricao)->first();
-		//Mail::to($usuario->NO_MAIL)->send(new InscricaoRealizadaComSucesso($inscricaoCompleta));
-		
-        return redirect()->action('CongressoController@index')->with('msgCadastro', $msgCadastro);
-  	}
+		Mail::to($usuario->NO_MAIL)->send(new InscricaoRealizadaComSucesso($inscricaoCompleta));
+
+		$msgCadastro = array(	"type"=>"success",
+								"text"=>"<strong>{$req['NO_USUARIO']}</strong>, sua inscrição foi realizada com sucesso. Procure seu líder para validá-la.<br>Você também receberá um e-mail de confirmação no endereço {$req['NO_MAIL']} em breve.");
+
+    return redirect()->action('CongressoController@index')->with('msgCadastro', $msgCadastro);
+	}
 	
+	
+		
+
 	
 	
 	

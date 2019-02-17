@@ -39,6 +39,8 @@ Route::get('/inscricao-detalhes/{cdInscricaoHash}','CongressoController@getInscr
 
 Route::post('/alterar-status-inscricao','CongressoController@postAlterarStatusInscricao');
 
+Route::post('/alterar-inscricao','UsuarioController@postFormInscricao');
+
 Route::get('/eventos','CongressoController@eventos');
 
 Route::get('/mail-confirmacao-inscricao/{mail}', function ($mail) { 
