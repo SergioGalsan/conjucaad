@@ -276,7 +276,7 @@
 																				
 																			</div>
 																			
-																			<div class="row" style="margin-top:20px">
+																			<div class="row" style="margin-top:20px; display: none;">
 																				<div class="col-lg-12">
 																					<div class="form-group">																					
 																						<input value="Não" type="checkbox" class="" name="ST_ALIMENTACAO" id="ST_ALIMENTACAO">	
