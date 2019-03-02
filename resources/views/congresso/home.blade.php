@@ -116,7 +116,8 @@
 										</ul>
 										<div class="tab-content">
 												<div role="tabpanel" id="tab-1" class="tab-pane active">
-														<div class="panel-body">
+														@if(1==2)
+														<div class="panel-body" style="display:none">
 															<div class="container ">
 																<div class="row">
 																	<div class="col-lg-12 text-center">
@@ -302,6 +303,21 @@
 																	</div>          
 																</div>
 															</div>																
+														</div>
+														@endif
+														<div class="panel-body" style="">
+															<div class="container ">
+																	<br /><br />
+																	<div class="row">
+																		
+																		<div class="col-md-12 text-center">
+																			@component('components.alert')
+																				@slot('type','danger')
+																				@slot('text','Inscrições encerradas!')
+																			@endcomponent
+																		</div>
+																	</div>
+															</div>		
 														</div>
 												</div> <!-- #tab-1 -->
 												@if(1==2)
