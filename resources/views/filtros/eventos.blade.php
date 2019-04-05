@@ -10,7 +10,7 @@ $path = $uri[count($uri)-1]
 ?>
 @extends('layout.principal')	
 
-@section('title', 'JUCAAD | Inscrições')
+@section('title', 'JUCAAD | Filtro de Eventos')
 
 @section('conteudo')
 
@@ -18,7 +18,7 @@ $path = $uri[count($uri)-1]
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center text-white">
-					<h2 class="section-heading">Inscrições</h2>
+					<h2 class="section-heading">Filtro de Eventos</h2>
 					<hr class="my-4">
 				</div>
 			</div>

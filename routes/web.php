@@ -27,13 +27,13 @@ Route::get('/usuarios','UsuarioController@index');
 
 Route::get('/congregacao/{cdCongregacao}/coordenadores','UsuarioController@congregacaoCoordenadores');
 
-Route::get('/inscritos/{cdEevento?}','CongressoController@getFiltroEventosAtivos');
+Route::get('/inscritos/{cdEevento?}','CongressoController@getFiltroEventosAtivosEncerrados');
 
 Route::post('/inscritos/{cdEevento?}','CongressoController@buscarInscricao');
 
-Route::get('/pedidos','CongressoController@getFiltroEventosAtivos');
+Route::get('/pedidos/{cdEevento?}','CongressoController@getFiltroEventosAtivosEncerrados');
 
-Route::post('/pedidos','CongressoController@buscarPedidos');
+Route::post('/pedidos/{cdEevento?}','CongressoController@buscarPedidos');
 
 Route::get('/inscricao-detalhes/{cdInscricaoHash}','CongressoController@getInscricaoDetalhes');
 

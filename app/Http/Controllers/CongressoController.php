@@ -37,10 +37,10 @@ class CongressoController extends Controller{
 			
   	}
 	
-	public function getFiltroEventosAtivos($cdEvento = null){
+	public function getFiltroEventosAtivosEncerrados($cdEvento = null){
 		//dd(Request::getPathInfo());	
 		$perfilLogado = Session::get('perfilLogado');
-		$eventoList = Evento::with('status')->where('CD_STATUS',1)/*->sortable()*/->get(); //dd($usuarioList);
+		$eventoList = Evento::with('status')->whereIn('CD_STATUS',[1,3])/*->sortable()*/->get(); 
 		
 		if(!empty($cdEvento)){
 			if(strpos(Request::url(),"/inscritos") !== false)	
