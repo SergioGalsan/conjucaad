@@ -27,9 +27,9 @@ Route::get('/usuarios','UsuarioController@index');
 
 Route::get('/congregacao/{cdCongregacao}/coordenadores','UsuarioController@congregacaoCoordenadores');
 
-Route::get('/inscritos','CongressoController@getFiltroEventosAtivos');
+Route::get('/inscritos/{cdEevento?}','CongressoController@getFiltroEventosAtivos');
 
-Route::post('/inscritos','CongressoController@buscarInscricao');
+Route::post('/inscritos/{cdEevento?}','CongressoController@buscarInscricao');
 
 Route::get('/pedidos','CongressoController@getFiltroEventosAtivos');
 

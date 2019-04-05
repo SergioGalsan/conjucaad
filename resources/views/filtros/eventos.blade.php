@@ -4,7 +4,11 @@ use App\Classes\MyUtil;
 ?>
 
 
-@extends('layout.principal2')	
+<?php 
+$uri = explode('/',$_SERVER["REQUEST_URI"]); 
+$path = $uri[count($uri)-1]
+?>
+@extends('layout.principal')	
 
 @section('title', 'JUCAAD | Inscrições')
 
@@ -23,13 +27,13 @@ use App\Classes\MyUtil;
         	@if(count($eventoList)>1)
 				<div class="row">
 					<div class="col-lg-12 text-left text-white">
-					<h3 class="section-heading">Selecione o Evento: 
-						<span class=""><select><option>Selecione</option>
-							@foreach($eventoList as $evento)
-								<option value="{{$evento->CD_EVENTO}}">{{$evento->NO_EVENTO}}</option>
-							@endforeach	
-						</select></span></h3>
-					
+						<h3 class="section-heading">Selecione o Evento: 
+							<span class=""><select path="{{$path}}"><option value=''>Selecione</option>
+								@foreach($eventoList as $evento)
+									<option value="{{$evento->CD_EVENTO}}">{{$evento->NO_EVENTO}}</option>
+								@endforeach	
+							</select></span>
+						</h3>
 					</div>
 				</div>				
 			@endif	
@@ -37,20 +41,9 @@ use App\Classes\MyUtil;
 	
     </section>
 	
-	
-    
+	<script type="text/javascript" src="{{url('js/filtro-eventos.js')}}"></script>
 
-	@if(count($errors) > 0)
-	<script>		
-		window.location.href='#cadastro';					
-	</script>
-	@endif
 	
-	@if(!empty($msgCadastro))
-	<script>		
-		window.location.href='#cadastro';					
-	</script>
-	@endif
 	
 @endsection    
 

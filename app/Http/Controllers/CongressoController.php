@@ -37,12 +37,17 @@ class CongressoController extends Controller{
 			
   	}
 	
-	public function getFiltroEventosAtivos(){
+	public function getFiltroEventosAtivos($cdEvento = null){
 		//dd(Request::getPathInfo());	
 		$perfilLogado = Session::get('perfilLogado');
 		$eventoList = Evento::with('status')->where('CD_STATUS',1)/*->sortable()*/->get(); //dd($usuarioList);
 		
-		if($eventoList->isEmpty())
+		if(!empty($cdEvento)){
+			if(strpos(Request::url(),"/inscritos") !== false)	
+				return $this->getInscritos($cdEvento);
+			elseif(strpos(Request::url(),"/pedidos") !== false)
+				return $this->getPedidos($cdEvento);
+		}elseif($eventoList->isEmpty())
 			return view("filtros.eventos");
 		elseif(count($eventoList)==1){
 			if(strpos(Request::url(),"/inscritos") !== false)	
@@ -114,7 +119,7 @@ class CongressoController extends Controller{
 										   									  	
 	}
 
-	public function buscarInscricao(InscritosRequest $request){ //dd($request->all());
+	public function buscarInscricao($cdEvento = null, InscritosRequest $request){ //dd($request->all());
 		$perfilLogado = Session::get('perfilLogado');		
 		$inscricaoList = Inscricao::with(['usuarioPerfil','status','evento','inscricaoPedido'])->where("CD_EVENTO",$request["CD_EVENTO"])->request($request)/*->sortable()*/
 			//->toSql(); 
