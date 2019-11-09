@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Usuario extends Model{
     
 	protected $table = 'TB_USUARIO';
-    protected $primaryKey = 'CD_USUARIO';
+	protected $primaryKey = 'CD_USUARIO';
+	protected $columns = array('CD_USUARIO','NO_USUARIO','NO_MAIL','NR_SEXO','DT_NASCIMENTO','DS_ENDERECO','NO_BAIRRO','NO_CIDADE','NR_CELULAR'
+								,'NR_TELEFONE','TX_SENHA','CD_USUARIO_LIDER','DT_INCLUSAO','DT_ATUALIZACAO'); // Para o scope de exclusao de campos
 	
 	//protected $with = array('usuarioLider');
 		
@@ -38,6 +40,13 @@ class Usuario extends Model{
 		
 	public function usuarioLider(){
         return $this->hasMany('App\Usuario','CD_USUARIO','CD_USUARIO_LIDER');
-    }
+	}
+	
+	
+
+	public function scopeExclude($query,$value = array()) 
+	{
+		return $query->select( array_diff( $this->columns,(array) $value) );
+	}
 	
 }

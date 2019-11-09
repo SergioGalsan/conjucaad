@@ -17,7 +17,7 @@
         <div class="row " style="margin-top: 100px;">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase" style="/*font-size:3.5rem*/">
-							<span style="background:#504379;color:#FFF">&nbsp;CON </span><span style="background:#FFF;color:#504379">&nbsp;JUCAAD </span><br><span style="letter-spacing: 1.4em;">&nbsp;2019</span>
+							<span style="background:#504379;color:#FFF">&nbsp;CON </span><span style="background:#FFF;color:#504379">&nbsp;JUCAAD </span><br><span style="letter-spacing: 1.4em;">&nbsp;2020</span>
             </h1>
             <hr>
 					</div>
@@ -46,6 +46,7 @@
             <hr class="light my-4">            
 						<ul class="text-left">
 							<li><strong style="color:yellow">Local:</strong> Assembleia de Deus - Campo de Santa Maria</li>
+							<li><strong style="color:yellow">Pastores:</strong> Pedro Martins e Leonice Martins</li>
 							<li><strong style="color:yellow">Data:</strong> 2 a 5 de março de 2019</li>				
 							<li><strong style="color:yellow">Endereço:</strong> CL 117, Área Especial, Lote C, Santa Maria - DF</li>
 							<li><strong style="color:yellow">Facebook:</strong> <a target="_blank" href="http://fb.com/jucaad" style="color:#FFF">fb.com/jucaad</a></li>				
@@ -116,8 +117,8 @@
 										</ul>
 										<div class="tab-content">
 												<div role="tabpanel" id="tab-1" class="tab-pane active">
-														@if(1==2)
-														<div class="panel-body" style="display:none">
+														@if(1==1)
+														<div class="panel-body" style="display:">
 															<div class="container ">
 																<div class="row">
 																	<div class="col-lg-12 text-center">
@@ -304,7 +305,7 @@
 																</div>
 															</div>																
 														</div>
-														@endif
+														@else
 														<div class="panel-body" style="">
 															<div class="container ">
 																	<br /><br />
@@ -319,8 +320,11 @@
 																	</div>
 															</div>		
 														</div>
+														@endif
 												</div> <!-- #tab-1 -->
+
 												@if(1==2)
+
 												<div role="tabpanel" id="tab-2" class="tab-pane">
 														<div class="panel-body">
 															<div class="container">

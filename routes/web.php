@@ -25,8 +25,6 @@ Route::post('/inscricao','UsuarioController@postFormInscricao');
 
 Route::get('/usuarios','UsuarioController@index');
 
-Route::get('/congregacao/{cdCongregacao}/coordenadores','UsuarioController@congregacaoCoordenadores');
-
 Route::get('/inscritos/{cdEevento?}','CongressoController@getFiltroEventosAtivosEncerrados');
 
 Route::post('/inscritos/{cdEevento?}','CongressoController@buscarInscricao');
@@ -50,4 +48,13 @@ Route::get('/mail-confirmacao-inscricao/{mail}', function ($mail) {
         return new App\Mail\InscricaoRealizadaComSucesso($inscricao);
     }else 
         return "Não foi localizada inscrição por parte do e-mail <strong>{$mail}</strong>";   
+});
+
+
+Route::group(['prefix' => 'json'], function(){
+
+    Route::get('/congregacao/{cdCongregacao}/coordenadores','UsuarioController@congregacaoCoordenadores');
+
+    Route::get('/usuario/{mail}','UsuarioController@findDadosUsuario');
+
 });

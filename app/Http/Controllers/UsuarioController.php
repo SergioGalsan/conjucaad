@@ -110,7 +110,27 @@ class UsuarioController extends Controller{
 		//dd($usuarioList);
 		return response()->json($usuarioList);
 		//return view("usuario.usuarios")->with('usuarioList',$usuarioList);									  	
-	}  
+	}
+	
+	public function findDadosUsuario($mail){		
+		/*
+		$usuario = Usuario::find(Kerberos::getAdMatric());
+		
+		if(empty($usuario) || $usuario->CD_PERFIL != 1){
+			$msgHome = array(	"type"=>"danger",
+								"text"=>"Você não tem autorização para acessar a página requisitada.");
+			
+			return redirect()->action('PesquisaController@index')->with('msgHome', $msgHome);
+		}
+		*/		
+		//$usuario = Usuario::exclude(['TX_SENHA'])->where("NO_MAIL",$mail)->first(); /*->toSql(); */
+		$usuarioPerfil = UsuarioPerfil::request("NO_MAIL",$mail)->first(); /*->toSql(); */
+		unset($usuarioPerfil->usuario[0]->TX_SENHA);
+		//dd($usuario);
+		//dd($usuarioList);
+		return response()->json($usuarioPerfil);
+		//return view("usuario.usuarios")->with('usuarioList',$usuarioList);									  	
+	}
 
 	public function postFormInscricao(UsuarioRequest $request){ 
 		$req = MyUtil::convArrDt($request->all()); 

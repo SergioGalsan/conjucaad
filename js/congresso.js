@@ -24,7 +24,7 @@ $(document).on('change','[name=CD_CONGREGACAO]', function(){
         $('<option>').val("").text("Selecione a congregação primeiro...").appendTo(selectbox);
         return false;
     }	
-	var url = $('meta[name=base-url]').attr('content') + '/congregacao/'+cdCongregacao+'/coordenadores';	
+	var url = $('meta[name=base-url]').attr('content') + '/json/congregacao/'+cdCongregacao+'/coordenadores';	
 	$.ajax({
 		 method: "GET",
 		 url: url,
