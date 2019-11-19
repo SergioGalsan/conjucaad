@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Classes\MyUtil;
 
 class UsuarioPerfil extends Model{
 	
@@ -45,7 +46,11 @@ class UsuarioPerfil extends Model{
         if (!empty($request['TX_SENHA']))   
             $query->whereHas('usuario', function ($query) use ($request) {
                 $query->where('TX_SENHA',base64_encode($request["TX_SENHA"]));
-            });           
+            });
+        if (!empty($request['DT_NASCIMENTO']))   
+            $query->whereHas('usuario', function ($query) use ($request) {
+                $query->where('DT_NASCIMENTO',$request["DT_NASCIMENTO"]);
+            });               
         if (!empty($request['CD_CONGREGACAO']))   
 			$query->where('CD_CONGREGACAO', $request['CD_CONGREGACAO']);
         if (!empty($request['CD_STATUS'])) 
@@ -53,5 +58,7 @@ class UsuarioPerfil extends Model{
         
         return $query;       
     }
+
+    
     
 }

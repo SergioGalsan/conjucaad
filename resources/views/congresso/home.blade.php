@@ -154,8 +154,8 @@
 																			
 																				<div class="col-md-12">
 																					<div class="form-group">
-																						<label>Nome Completo</label>
-																						<input type="text" class="form-control" name="NO_USUARIO" required>					
+																						<label>E-mail <span style="color: #f05f40; font-size: 12px;">(Não repetir e-mail já utilizado em outra inscrição deste congresso)</span></label>
+																						<input type="email" class="form-control" name="NO_MAIL" id="NO_MAIL" required>	
 																					</div>
 																				</div>
 																				<!--
@@ -181,10 +181,17 @@
 
 																			<div class="row">
 																			
+																				<div class="col-md-3">
+																					<div class="form-group">
+																						<label>Data de Nascimento</label>
+																						<input type="text" class="form-control mDate" name="DT_NASCIMENTO">					
+																					</div>
+																				</div>
+
 																				<div class="col-md-6">
 																					<div class="form-group">
-																						<label>E-mail <span style="color: #f05f40; font-size: 12px;">(Não repetir e-mail já utilizado em outra inscrição deste congresso)</span></label>
-																						<input type="email" class="form-control" name="NO_MAIL" required>
+																						<label>Nome Completo</label>
+																						<input type="text" class="form-control" name="NO_USUARIO" required>
 																					</div>
 																				</div>
 																			
@@ -197,14 +204,7 @@
 																							<option value="2">Feminino</option>						
 																						</select>
 																					</div>
-																				</div>
-																				
-																				<div class="col-md-3">
-																					<div class="form-group">
-																						<label>Data de Nascimento</label>
-																						<input type="text" class="form-control mDate" name="DT_NASCIMENTO">					
-																					</div>
-																				</div>	
+																				</div>																				
 																				
 																			</div>
 																			

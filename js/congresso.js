@@ -16,9 +16,9 @@ $(document).on('click','#a2GoToTab1', function(){
     $('#a1GoToTab1').click();
 })
 
-$(document).on('change','[name=CD_CONGREGACAO]', function(){ 
+function comboLider(cdCongregacao,val){
     var selectbox = $('[name=CD_USUARIO_LIDER]');
-    var cdCongregacao = $(this).val();
+    //var cdCongregacao = $(this).val();
     if(cdCongregacao==""){
         selectbox.find('option').remove();               
         $('<option>').val("").text("Selecione a congregação primeiro...").appendTo(selectbox);
@@ -35,6 +35,40 @@ $(document).on('change','[name=CD_CONGREGACAO]', function(){
                 $.each(data, function (i, d) {
                     $('<option>').val(d.CD_USUARIO).text(d.usuario[0].NO_USUARIO).appendTo(selectbox);
                 });
+                if(val)
+                    selectbox.val(val);
+            }  	
+		 }
+	  });
+}
+
+$(document).on('change','[name=CD_CONGREGACAO]', function(){ 
+    comboLider($(this).val());
+});
+
+$(document).on('blur','[name=DT_NASCIMENTO]', function(){ 
+    
+    var mail = $('#NO_MAIL').val();
+    var nascimento = dataForBanco($(this).val());      
+    if(mail=="" || mail==undefined){        
+        return false;
+    }	
+	var url = $('meta[name=base-url]').attr('content') + '/json/usuario/'+ mail + '/' + nascimento;	
+	$.ajax({
+		 method: "GET",
+		 url: url,
+		 dataType: "json",		 
+		 success: function(data) {                        
+            if(data != null){                                
+                $("[name=NO_USUARIO]").val(data.usuario[0].NO_USUARIO);                
+                $("[name=NR_SEXO]").val(data.usuario[0].NR_SEXO);
+                $("[name=DT_NASCIMENTO]").val(data.usuario[0].DT_NASCIMENTO);
+                $("[name=NR_CELULAR]").val(data.usuario[0].NR_CELULAR);
+                $("[name=DS_ENDERECO]").val(data.usuario[0].DS_ENDERECO);
+                $("[name=NO_CIDADE]").val(data.usuario[0].NO_CIDADE);
+                $("[name=NO_BAIRRO]").val(data.usuario[0].NO_BAIRRO);
+                $("[name=CD_CONGREGACAO]").val(data.CD_CONGREGACAO);
+                comboLider(data.CD_CONGREGACAO,data.usuario[0].CD_USUARIO_LIDER);                
             }  	
 		 }
 	  });
@@ -144,3 +178,17 @@ $(document).ready(function(){
     //$("[name=CD_USUARIO_LIDER]").val("2");
 })
 */
+
+
+function dataForBanco(data) {
+    var dia  = data.split("/")[0];
+    var mes  = data.split("/")[1];
+    var ano  = data.split("/")[2];
+  
+    return ano + '-' + ("0"+mes).slice(-2) + '-' + ("0"+dia).slice(-2);
+    // Utilizo o .slice(-2) para garantir o formato com 2 digitos.
+  }
+  
+  
+  
+  

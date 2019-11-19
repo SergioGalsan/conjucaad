@@ -49,4 +49,13 @@ class Usuario extends Model{
 		return $query->select( array_diff( $this->columns,(array) $value) );
 	}
 	
+	/*
+	public function getNrTelefoneAttribute(){
+		return '000'; //MyUtil::mask($this->NR_TELEFONE,'mFone');
+	}
+
+	public function getNrCelularAttribute(){
+			return '000'; //MyUtil::mask($this->NR_CELULAR,'mFone');
+	}
+	*/
 }

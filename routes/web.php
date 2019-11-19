@@ -55,6 +55,6 @@ Route::group(['prefix' => 'json'], function(){
 
     Route::get('/congregacao/{cdCongregacao}/coordenadores','UsuarioController@congregacaoCoordenadores');
 
-    Route::get('/usuario/{mail}','UsuarioController@findDadosUsuario');
+    Route::get('/usuario/{mail}/{nascimento}','UsuarioController@findDadosUsuario');
 
 });

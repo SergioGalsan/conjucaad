@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\UsuarioRequest;
 use App\Mail\InscricaoRealizadaComSucesso;
 use App\Usuario;
+use App\Evento;
 use App\UsuarioPerfil;
 use App\Inscricao;
 use App\InscricaoPedido;
@@ -112,7 +113,7 @@ class UsuarioController extends Controller{
 		//return view("usuario.usuarios")->with('usuarioList',$usuarioList);									  	
 	}
 	
-	public function findDadosUsuario($mail){		
+	public function findDadosUsuario($mail, $nascimento){		
 		/*
 		$usuario = Usuario::find(Kerberos::getAdMatric());
 		
@@ -123,16 +124,22 @@ class UsuarioController extends Controller{
 			return redirect()->action('PesquisaController@index')->with('msgHome', $msgHome);
 		}
 		*/		
-		//$usuario = Usuario::exclude(['TX_SENHA'])->where("NO_MAIL",$mail)->first(); /*->toSql(); */
-		$usuarioPerfil = UsuarioPerfil::request("NO_MAIL",$mail)->first(); /*->toSql(); */
-		unset($usuarioPerfil->usuario[0]->TX_SENHA);
-		//dd($usuario);
-		//dd($usuarioList);
+		//$usuario = Usuario::exclude(['TX_SENHA'])->where("NO_MAIL",$mail)->first(); dd($usuario); /*->toSql(); */
+		$usuarioPerfil = UsuarioPerfil::request(['NO_MAIL' => $mail, 'DT_NASCIMENTO' => $nascimento])->first(); // ->toSql();
+		//dd($usuarioPerfil);
+		if(!empty($usuarioPerfil)){
+			$usuarioPerfil->usuario[0]->DT_NASCIMENTO = date("d/m/Y", strtotime($usuarioPerfil->usuario[0]->DT_NASCIMENTO));			
+			$usuarioPerfil->usuario[0]->NR_TELEFONE = MyUtil::mask($usuarioPerfil->usuario[0]->NR_TELEFONE,'mFone');
+			$usuarioPerfil->usuario[0]->NR_CELULAR = MyUtil::mask($usuarioPerfil->usuario[0]->NR_CELULAR,'mFone');
+			unset($usuarioPerfil->usuario[0]->TX_SENHA);
+		}
+		//dd($usuarioPerfil->usuario[0]->NR_CELULAR);
 		return response()->json($usuarioPerfil);
 		//return view("usuario.usuarios")->with('usuarioList',$usuarioList);									  	
 	}
 
-	public function postFormInscricao(UsuarioRequest $request){ 
+	public function postFormInscricao(UsuarioRequest $request){
+		$evento = Evento::where('CD_STATUS',1)->first(); 
 		$req = MyUtil::convArrDt($request->all()); 
 		$req["NR_CELULAR"] = MyUtil::clearMask($req["NR_CELULAR"]);	
 		$req["NR_TELEFONE"] = MyUtil::clearMask($req["NR_TELEFONE"]);
@@ -155,7 +162,7 @@ class UsuarioController extends Controller{
 			$usuarioPerfil = UsuarioPerfil::create(["CD_USUARIO"=>$usuario->CD_USUARIO,"CD_PERFIL"=>3,"CD_CONGREGACAO"=>$req["CD_CONGREGACAO"],"CD_STATUS"=>1]);
 		
 		// Se a inscrição estiver validada, não permitir refazê-la
-		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",1],["CD_STATUS",5]])->first(); //dd($inscricao);
+		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",$evento->CD_EVENTO],["CD_STATUS",5]])->first(); //dd($inscricao);
 		if(!empty($inscricao)){
 			if($request->getPathInfo() == "/alterar-inscricao"){
 				$msg = array(	"type"=>"danger",
@@ -169,13 +176,13 @@ class UsuarioController extends Controller{
 			return redirect()->action('CongressoController@index')->with('msgCadastro', $msgCadastro);						
 		}
 
-		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",1]])->first(); //dd($inscricao);
+		$inscricao = Inscricao::where([["CD_USUARIO_PERFIL",$usuarioPerfil->CD_USUARIO_PERFIL],["CD_EVENTO",$evento->CD_EVENTO]])->first(); //dd($inscricao);
 
 		if(empty($inscricao)){
-			$inscricao = Inscricao::create(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>1,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>@$req["ST_ALIMENTACAO"]]);
+			$inscricao = Inscricao::create(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>$evento->CD_EVENTO,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>@$req["ST_ALIMENTACAO"]]);
 		}else{
 			InscricaoPedido::where("CD_INSCRICAO",$inscricao->CD_INSCRICAO)->delete();
-			$inscricao->fill(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>1,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>(@$req["ST_ALIMENTACAO"]?:'Sim')]);
+			$inscricao->fill(["CD_USUARIO_PERFIL"=>$usuarioPerfil->CD_USUARIO_PERFIL,"CD_EVENTO"=>$evento->CD_EVENTO,"CD_STATUS"=>3,"ST_ALIMENTACAO"=>(@$req["ST_ALIMENTACAO"]?:'Sim')]);
 			$inscricao->save();
 		}
 
@@ -194,7 +201,7 @@ class UsuarioController extends Controller{
 		// Envio do e-mail para o inscrito		
 		$cdInscricao = $inscricao->CD_INSCRICAO;
 		$inscricaoCompleta = Inscricao::with(['usuarioPerfil','status','evento','inscricaoPedido'])->where('CD_INSCRICAO',$cdInscricao)->first();
-		Mail::to($usuario->NO_MAIL)->send(new InscricaoRealizadaComSucesso($inscricaoCompleta));
+		//Mail::to($usuario->NO_MAIL)->send(new InscricaoRealizadaComSucesso($inscricaoCompleta));
 
 		$msgCadastro = array(	"type"=>"success",
 								"text"=>"<strong>{$req['NO_USUARIO']}</strong>, sua inscrição foi realizada com sucesso. Procure seu líder para validá-la.<br>Você também receberá um e-mail de confirmação no endereço {$req['NO_MAIL']} em breve.");
