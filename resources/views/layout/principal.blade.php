@@ -2,16 +2,17 @@
 if(!empty($perfilLogado))
 	$userName = explode(' ',$perfilLogado->usuario[0]->NO_USUARIO);
 
-if(strpos(Request::url(),'inscritos')===false){
-	$inscricaoHref = "#inscricao";
-	$inicioHref = "#page-top";
-	$sobreHref = "#sobre";
-	$contatoHref = "#contato";	
-}else{
+if(strpos(Request::url(),'inscritos')!==false || strpos(Request::url(),'pedidos')!==false 
+	|| strpos(Request::url(),'inscricao-detalhes')!==false || strpos(Request::url(),'alterar-senha')!==false){
 	$inscricaoHref = url("/#inscricao");
 	$inicioHref = url("/");
 	$sobreHref = url("/#sobre");
 	$contatoHref = url("/#contato");	
+}else{
+	$inscricaoHref = "#inscricao";
+	$inicioHref = "#page-top";
+	$sobreHref = "#sobre";
+	$contatoHref = "#contato";	
 }	
 
 //dd($perfilLogado);
