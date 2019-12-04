@@ -58,8 +58,8 @@ div[aria-labelledby="dropdownLogin"]{
 /* * { margin:0; padding:0;} */
 #slide { 
   width: 850px; 
-  overflow: hidden; 
   height: 500px;
+  overflow: hidden; 
   margin: 50px auto;
   box-shadow: 0 0 8px #000;
   position: relative;
@@ -69,6 +69,8 @@ div[aria-labelledby="dropdownLogin"]{
   z-index: 1;
   display: none;
   left: 0;
+  width: 850px;   
+  height: 500px;
 }
 #slide p {
   z-index:2;
@@ -83,7 +85,27 @@ div[aria-labelledby="dropdownLogin"]{
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  #slide { 
+    width: 550px; 
+    height: 350px;
+  }
+  #slide img {    
+    width: 550px; 
+    height: 350px;
+  }
+}
 
+@media (max-width: 498px) {
+  #slide { 
+    width: 350px; 
+    height: 200px;
+  }
+  #slide img {    
+    width: 350px; 
+    height: 200px;
+  }
+}
 
 /*
 #popup {

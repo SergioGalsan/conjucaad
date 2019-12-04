@@ -36,9 +36,9 @@
           </div>
 					<div class="col-lg-12 mx-auto">
 						<figure id="slide">
-							<img src="img/sorteio_2020.jfif" alt="Sorteio" width="850px" height="500px" >
-							<img src="img/relogio_mi_band4.jfif" alt="Relógio Mi Band 4" width="850px" height="500px" >
-							<img src="img/notebook_lenovo.jfif" alt="Notebook Lenovo Idepad" width="850px"height="500px" >
+							<img src="img/sorteio_2020.jfif" alt="Sorteio"  >
+							<img src="img/relogio_mi_band4.jfif" alt="Relógio Mi Band 4"  >
+							<img src="img/notebook_lenovo.jfif" alt="Notebook Lenovo Idepad" >
 						</figure>
 					</div>	
         </div>
