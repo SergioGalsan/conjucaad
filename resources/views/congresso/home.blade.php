@@ -16,8 +16,8 @@
 			<div class="container my-auto ">
         <div class="row " style="margin-top: 100px;">
           <div class="col-lg-10 mx-auto">
-            <h1 class="text-uppercase" style="/*font-size:3.5rem*/">
-							<span style="background:#504379;color:#FFF">&nbsp;CON </span><span style="background:#FFF;color:#504379">&nbsp;JUCAAD </span><br><span style="letter-spacing: 1.4em;">&nbsp;2020</span>
+		  			<h1 class="text-uppercase" style="/*font-size:3.5rem*/">
+							<span style="color:#FFF;font-family: fantasy;margin-right: -5px;">&nbsp;CON </span><span style="color: #fea305;font-family: fantasy;">JUCAAD </span><br><span style="letter-spacing: 0.80em;">&nbsp;2020</span>
             </h1>
             <hr>
 					</div>
@@ -30,10 +30,17 @@
 						@endif
 					</div>	
           <div class="col-lg-12 mx-auto">
-						<p class="text-faded mb-12" style="font-size:3.2rem">JOÃO 15:5</p>
-						<p class="text-faded mb-12" style="font-size:2.1rem">"EU SOU A VIDEIRA VERDADEIRA; VOCÊS SÃO OS RAMOS. SE ALGUÉM PERMANECER EM MIM E EU NELE, ESSE DARÁ MUITO FRUTO; POIS SEM MIM VOCÊS NÃO PODEM FAZER COISA ALGUMA."</p>
-						<p class="text-faded mb-12"><img src="{{url('/img/conectadosComCristo.jpg')}}" style="width:100%;/*heigth:600px*/" alt="Conectados com Cristo"></p>
+						<p class="text-faded mb-12" style="font-size:3.2rem">JOÃO 12:32</p>
+						<p class="text-faded mb-12" style="font-size:2.1rem">"MAS EU, QUANDO FOR LEVANTADO DA TERRA, ATRAIREI TODOS A MIM."</p>
+						<p class="text-faded mb-12 d-none"><img src="{{url('/img/conectadosComCristo.jpg')}}" style="width:100%;/*heigth:600px*/" alt="Conectados com Cristo"></p>
           </div>
+					<div class="col-lg-12 mx-auto">
+						<figure id="slide">
+							<img src="img/sorteio_2020.jfif" alt="Sorteio" width="850px" height="500px" >
+							<img src="img/relogio_mi_band4.jfif" alt="Relógio Mi Band 4" width="850px" height="500px" >
+							<img src="img/notebook_lenovo.jfif" alt="Notebook Lenovo Idepad" width="850px"height="500px" >
+						</figure>
+					</div>	
         </div>
       </div>
     </header>
@@ -288,7 +295,7 @@
 																			</div>
 
 																			<div class="row">
-																				<p class="text-primary">* A inscrição corresponde a participação no evento mais os custeios com alimentação, por isso será cobrada uma taxa de <span style="color:#FFF000;">R$ 40,00</span> que deve ser repassada ao seu lider.</p>
+																				<p class="text-primary">* A inscrição corresponde a participação no evento mais a camiseta, por isso será cobrada uma taxa de <span style="color:#FFF000;">R$ 100,00</span> que deve ser repassada ao seu lider.</p>
 																			</div>
 																			
 																			<div class="row">

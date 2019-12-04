@@ -201,10 +201,10 @@ class UsuarioController extends Controller{
 		// Envio do e-mail para o inscrito		
 		$cdInscricao = $inscricao->CD_INSCRICAO;
 		$inscricaoCompleta = Inscricao::with(['usuarioPerfil','status','evento','inscricaoPedido'])->where('CD_INSCRICAO',$cdInscricao)->first();
-		//Mail::to($usuario->NO_MAIL)->send(new InscricaoRealizadaComSucesso($inscricaoCompleta));
+		Mail::to($usuario->NO_MAIL)->send(new InscricaoRealizadaComSucesso($inscricaoCompleta));
 
 		$msgCadastro = array(	"type"=>"success",
-								"text"=>"<strong>{$req['NO_USUARIO']}</strong>, sua inscrição foi realizada com sucesso. Procure seu líder para validá-la.<br>Você também receberá um e-mail de confirmação no endereço {$req['NO_MAIL']} em breve.");
+								"text"=>"<strong>{$req['NO_USUARIO']}</strong>, sua inscrição foi realizada com sucesso. Procure seu líder para informar <strong>o tamanho da camiseta</strong> e validá-la. Você também receberá um e-mail de confirmação no endereço <strong>{$req['NO_MAIL']}</strong> em breve.");
 
     return redirect()->action('CongressoController@index')->with('msgCadastro', $msgCadastro);
 	}
